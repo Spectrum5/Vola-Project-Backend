@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// Controllers
+
+// Models
+use App\Http\Controllers\Api\MovieController;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
+    // Aggiungere rotte store, edit e destroy solo per utenti autenticati
 });
+Route::resource('movies', MovieController::class);
