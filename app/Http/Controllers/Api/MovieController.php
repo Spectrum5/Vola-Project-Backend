@@ -10,13 +10,11 @@ use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
-// Models
-use App\Models\Movie;
+use GuzzleHttp\Client;
 
-
-
-class ApartmentController extends Controller
+class MovieController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +23,15 @@ class ApartmentController extends Controller
      */
     public function index(Request $request)
     {
-    //    
+        $client = new Client();
+
+        $title = 'superman';
+        $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&t='.$title);
+
+        if ($res->getStatusCode() == 200) { // 200 OK
+            $response_data = $res->getBody()->getContents();
+        };
+        return response()->json($response_data);
     }
 
     /**
@@ -38,6 +44,4 @@ class ApartmentController extends Controller
     {
         // 
     }
-
-   
 }
