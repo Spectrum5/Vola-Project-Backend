@@ -24,11 +24,15 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $client = new Client();
-
-        // $title = 'superman';
-        $title = $request['title'];
-        $pages = $request['page'];
-        $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&s='.$title."&page=".$pages);
+        if ($request['title'] != '')  {
+            $title = $request['title'];
+            $pages = $request['page'];
+            $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&s='.$title."&page=".$pages);
+        }
+        elseif ($request['id'] != null) {
+            $id = $request['id'];
+            $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&i='.$id);
+        }
 
         if ($res->getStatusCode() == 200) { // 200 OK
             $response = $res->getBody()->getContents();
@@ -37,14 +41,4 @@ class MovieController extends Controller
         return response()->json($responseDecode);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        // 
-    }
 }
