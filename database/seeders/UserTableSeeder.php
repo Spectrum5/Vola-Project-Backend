@@ -29,7 +29,6 @@ class UserTableSeeder extends Seeder
         $testUser->last_name = 'test l_name';
         $testUser->email = 'test@example.com';
         $testUser->password = Hash::make('passwordtest');
-        $testUser->date_of_birth = '2000/01/01';
         $testUser->save();
 
         for ($i = 0; $i < 10; $i++) {
@@ -43,7 +42,6 @@ class UserTableSeeder extends Seeder
             $newUser->last_name = Str::lower($surname);
             $newUser->email = str_replace("'", '', Str::lower($name)) . '.' . str_replace("'", '', Str::lower($surname)) . '@email.com';
             $newUser->password = Hash::make($password);
-            $newUser->date_of_birth = $faker->dateTimeBetween('-65 years', '-19 years');
 
             $newUser->save();
         }

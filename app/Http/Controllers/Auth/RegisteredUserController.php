@@ -32,7 +32,6 @@ class RegisteredUserController extends Controller
             'last_name' => ['required', 'string', 'max:64'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'date_of_birth' => ['nullable'],
         ]);
 
         $newUser = new User;
@@ -40,7 +39,6 @@ class RegisteredUserController extends Controller
         $newUser->first_name = Str::lower($request->first_name);
         $newUser->last_name = Str::lower($request->last_name);
         $newUser->email = Str::lower($request->email);
-        $newUser->date_of_birth = $request->date_of_birth;
         $newUser->password = Hash::make($request->password);
 
         $newUser->save();
