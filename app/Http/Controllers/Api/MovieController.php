@@ -27,7 +27,7 @@ class MovieController extends Controller
 
         // $title = 'superman';
         $title = $request['title'];
-        $pages = 10;
+        $pages = $request['page'];
         $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&s='.$title."&page=".$pages);
 
         if ($res->getStatusCode() == 200) { // 200 OK
