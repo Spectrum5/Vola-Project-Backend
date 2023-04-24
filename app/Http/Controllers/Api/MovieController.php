@@ -26,11 +26,12 @@ class MovieController extends Controller
         $client = new Client();
 
         $title = 'superman';
-        $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&t='.$title);
+        $res = $client->request('GET', 'http://www.omdbapi.com/?apikey=151c60c1&s='.$title);
 
         if ($res->getStatusCode() == 200) { // 200 OK
             $response_data = $res->getBody()->getContents();
-        };
+        }
+        else {$response_data = ["message" => 'Not Found'];}
         return response()->json($response_data);
     }
 
