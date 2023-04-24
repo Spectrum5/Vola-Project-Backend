@@ -31,7 +31,6 @@ class MovieController extends Controller
         if ($res->getStatusCode() == 200) { // 200 OK
             $response_data = $res->getBody()->getContents();
         }
-        else {$response_data = ["message" => 'Not Found'];}
         return response()->json($response_data);
     }
 
