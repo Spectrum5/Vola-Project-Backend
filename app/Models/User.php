@@ -23,9 +23,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function apartments()
+    public function movies()
     {
-        return $this->hasMany(Apartment::class);
+        // 
     }
 
     /**
