@@ -21,7 +21,8 @@ use App\Http\Controllers\Api\MovieController;
 */
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+    
     return $request->user();
     // Aggiungere rotte store, edit e destroy solo per utenti autenticati
 });
-Route::resource('movies', MovieController::class);
+Route::resource('movies', MovieController::class)->middleware(['auth:sanctum']);
